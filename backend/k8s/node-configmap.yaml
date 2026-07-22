@@ -10,5 +10,3 @@ data:
   DB_HOST: "postgres-service"
   DB_PORT: "5432"
   DB_NAME: "devdb"
-  LOG_LEVEL: "info"
-  NODE_ENV: "development"
