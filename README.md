@@ -1,118 +1,128 @@
-# Employee Management System - Kubernetes DevOps Demo
+# 🚀 Employee Management System on Kubernetes
 
-A full-stack employee management application built to demonstrate Kubernetes deployment with Kind!
+A full-stack Employee Management application deployed on Kubernetes using React, Node.js, PostgreSQL and Docker.
 
-## Tech Stack
+The goal of this project is to learn production-style Kubernetes concepts by building and deploying a real application instead of isolated examples.
 
-- **Frontend**: React + Vite + Tailwind CSS
-- **Backend**: Node.js + Express
-- **Database**: PostgreSQL
-- **Web Server**: Nginx (for frontend)
-- **Containerization**: Docker
-- **Orchestration**: Kubernetes (via Kind)
+---
 
-## Project Structure
+## ✨ Features
 
-```
-devops-demo/
-├── backend/          # Node.js Express API
-│   ├── k8s/          # Backend Kubernetes manifests
-│   ├── server.js     # API server code
-│   └── Dockerfile    # Backend Docker image
-├── frontend/         # React + Vite frontend
-│   ├── k8s/          # Frontend Kubernetes manifests
-│   ├── src/          # Frontend source code
-│   ├── nginx.conf    # Nginx configuration for proxying API calls
-│   └── Dockerfile    # Frontend Docker image
-├── postgres/         # PostgreSQL Kubernetes manifests
-├── kind-config.yaml  # Kind cluster configuration
-└── namespace.yaml    # Kubernetes namespace manifest
-```
+- Employee CRUD operations
+- PostgreSQL database
+- Persistent storage using PVC
+- React frontend
+- Node.js Express backend
+- Kubernetes Deployments
+- Kubernetes Services
+- ConfigMaps
+- Secrets
+- Resource Requests & Limits
+- Liveness & Readiness Probes
+- Dockerized applications
 
-## Local Development
+---
 
-### Prerequisites
+## 🛠 Tech Stack
 
+Frontend
+- React
+- Axios
+- Tailwind CSS
+- Vite
+
+Backend
+- Node.js
+- Express
+- PostgreSQL
+
+DevOps
 - Docker
-- Node.js & npm
+- Kubernetes (Kind)
 - kubectl
-- Kind (Kubernetes in Docker)
 
-### Running Locally (Without Kubernetes)
+---
 
-1. **Start PostgreSQL locally or use Docker**
-   ```bash
-   docker run --name devops-postgres -e POSTGRES_USER=devuser -e POSTGRES_PASSWORD=devpassword -e POSTGRES_DB=devdb -p 5432:5432 -d postgres:15
-   ```
+## 🏗 Architecture
 
-2. **Start Backend**
-   ```bash
-   cd backend
-   npm install
-   npm run start
-   ```
+Browser
+    │
+    ▼
+Frontend Service
+    │
+    ▼
+Frontend Pods
+    │
+    ▼
+Backend Service
+    │
+    ▼
+Backend Pods
+    │
+    ▼
+PostgreSQL Service
+    │
+    ▼
+PostgreSQL Pod
+    │
+    ▼
+Persistent Volume Claim
 
-3. **Start Frontend**
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
+---
 
-## Kubernetes Deployment (Kind)
+## 📸 Screenshots
 
-### Step 1: Create Kind Cluster
-```bash
-kind create cluster --config kind-config.yaml
-```
+- Dashboard: ![Dashboard](screenshots/app-dashboard.png)
+- Employee List: ![Employee List](screenshots/employee-list.png)
+- Edit Employee: ![Edit Employee](screenshots/edit-employee.png)
+- Search Employee: ![Search Employee](screenshots/search-employee.png)
 
-### Step 2: Build & Load Docker Images
-```bash
-# Build backend
-cd backend
-docker build -t node-backend:v3 .
-kind load docker-image node-backend:v3
+---
 
-# Build frontend
-cd ../frontend
-docker build -t employee-frontend:v1 .
-kind load docker-image employee-frontend:v1
-```
+## 🚀 Run
 
-### Step 3: Deploy to Kubernetes
-```bash
-cd ..  # Go back to project root
-kubectl apply -f namespace.yaml
-kubectl apply -f postgres/
-kubectl apply -f backend/k8s/
-kubectl apply -f frontend/k8s/
-```
+### Build Images
 
-### Step 4: Verify Everything is Running
-```bash
-kubectl get all -n devops-demo
-```
+docker build ...
 
-### Step 5: Access the Application
-Open your browser and go to:
-```
-http://localhost:30080
-```
+### Load into Kind
 
-## Features
+kind load docker-image ...
 
-- ✅ Add new employees
-- ✅ View all employees
-- ✅ Edit existing employees
-- ✅ Delete employees
-- ✅ Search employees
-- ✅ Real-time health status of backend/database
-- ✅ Department badges (DevOps, Backend, QA, HR)
-- ✅ Responsive UI
+### Deploy
 
-## Cleanup
+kubectl apply -f ...
 
-To delete the Kind cluster:
-```bash
-kind delete cluster
-```
+---
+
+## 📚 Kubernetes Concepts Covered
+
+- Pods
+- ReplicaSets
+- Deployments
+- Services
+- ConfigMaps
+- Secrets
+- Persistent Volumes
+- Persistent Volume Claims
+- Resource Management
+- Health Probes
+- Rolling Updates
+
+---
+
+## 🔮 Future Improvements
+
+- StatefulSet for PostgreSQL
+- Ingress Controller
+- HTTPS / TLS
+- Horizontal Pod Autoscaler
+- GitHub Actions CI/CD
+- Helm Charts
+- Monitoring with Prometheus & Grafana
+
+---
+
+## 👨‍💻 Author
+
+Muhammad Saad Nawaz

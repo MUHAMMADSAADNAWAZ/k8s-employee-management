@@ -19,7 +19,7 @@ spec:
     spec:    
       containers:
       - name: node
-        image: node-backend:v3
+        image: employee-frontend:v1
         imagePullPolicy: IfNotPresent
 
         ports:
