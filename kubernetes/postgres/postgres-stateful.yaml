@@ -24,7 +24,6 @@ spec:
 
           ports:
             - containerPort: 5432
-              name: postgres
 
           env:
             - name: POSTGRES_DB
@@ -45,51 +44,9 @@ spec:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
 
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
-
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
-
-          readinessProbe:
-            exec:
-              command:
-                - pg_isready
-                - -U
-                - $(POSTGRES_USER)
-                - -d
-                - $(POSTGRES_DB)
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 3
-            failureThreshold: 6
-
-          livenessProbe:
-            exec:
-              command:
-                - pg_isready
-                - -U
-                - $(POSTGRES_USER)
-                - -d
-                - $(POSTGRES_DB)
-            initialDelaySeconds: 30
-            periodSeconds: 15
-            timeoutSeconds: 3
-            failureThreshold: 3
-
-          startupProbe:
-            exec:
-              command:
-                - pg_isready
-                - -U
-                - $(POSTGRES_USER)
-                - -d
-                - $(POSTGRES_DB)
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 3
-            failureThreshold: 24
 
   volumeClaimTemplates:
     - metadata:

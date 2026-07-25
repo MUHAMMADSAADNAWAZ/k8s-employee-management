@@ -16,10 +16,46 @@ spec:
       labels:  
         app: node
 
-    spec:    
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15
+          imagePullPolicy: IfNotPresent
+
+          envFrom:
+            - configMapRef:
+                name: node-configmap
+
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
+
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready \
+                -h "$DB_HOST" \
+                -p "$DB_PORT" \
+                -U "$POSTGRES_USER" \
+                -d "$POSTGRES_DB"; do
+                echo "Waiting for PostgreSQL at $DB_HOST:$DB_PORT/$POSTGRES_DB ..."
+                sleep 2
+              done
+              echo "PostgreSQL is ready. Starting backend."
+
       containers:
       - name: node
-        image: employee-frontend:v1
+        image: employee-backend:v1
         imagePullPolicy: IfNotPresent
 
         ports:
@@ -54,12 +90,13 @@ spec:
           httpGet:
             path: /
             port: 3001
-          initialDelaySeconds: 5
+          initialDelaySeconds: 10
           periodSeconds: 10
        
         readinessProbe:
           httpGet:
-            path: /
+            path: /health
             port: 3001
           initialDelaySeconds: 2
           periodSeconds: 5                  
+          failureThreshold: 3
