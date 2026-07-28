@@ -73,8 +73,11 @@ Persistent Volume Claim
 ## 📸 Screenshots
 
 - Dashboard: ![Dashboard](screenshots/app-dashboard.png)
+
 - Employee List: ![Employee List](screenshots/employee-list.png)
+
 - Edit Employee: ![Edit Employee](screenshots/edit-employee.png)
+
 - Search Employee: ![Search Employee](screenshots/search-employee.png)
 
 ---
@@ -108,13 +111,13 @@ kubectl apply -f ...
 - Resource Management
 - Health Probes
 - Rolling Updates
+- StatefulSet for PostgreSQL
+- Ingress Controller
 
 ---
 
 ## 🔮 Future Improvements
 
-- StatefulSet for PostgreSQL
-- Ingress Controller
 - HTTPS / TLS
 - Horizontal Pod Autoscaler
 - GitHub Actions CI/CD
