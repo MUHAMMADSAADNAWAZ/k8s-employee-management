@@ -81,6 +81,17 @@ app.get("/health", async (req, res) => {
   }
 });
 
+// Stress Endpoint for HPA Testing
+app.get("/stress", (req, res) => {
+  const end = Date.now() + 10000; // 10 seconds
+
+  while (Date.now() < end) {
+    Math.random() * Math.random();
+  }
+
+  res.send("CPU stress completed");
+});
+
 // Create Employee
 app.post("/employees", async (req, res) => {
   try {
