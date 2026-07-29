@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-configmap
+  namespace: devops-demo
+data:
+  PORT: {{ .Values.backend.env.port | quote }}
+  DB_HOST: {{ .Values.backend.env.dbHost | quote }}
+  DB_PORT: {{ .Values.backend.env.dbPort | quote }}
+  DB_NAME: {{ .Values.backend.env.dbName | quote }}

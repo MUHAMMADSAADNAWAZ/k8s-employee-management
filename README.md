@@ -206,6 +206,7 @@ kubectl top pods -n devops-demo
 - NGINX Ingress Controller
 - Horizontal Pod Autoscaler (HPA)
 - Metrics Server
+- Helm Charts
 
 ---
 
@@ -233,10 +234,64 @@ The HPA uses Metrics Server to continuously monitor CPU utilization and scale th
 
 ---
 
+# ⎈ Helm Deployment
+
+## Environment-specific values
+
+Create and use environment overlays:
+
+```bash
+helm upgrade --install employee ./Helm/employee-management \
+  -n devops-demo \
+  --create-namespace \
+  -f ./Helm/employee-management/values-dev.yaml
+```
+
+For production-style overrides:
+
+```bash
+helm upgrade --install employee ./Helm/employee-management \
+  -n devops-demo \
+  -f ./Helm/employee-management/values-prod.yaml
+```
+
+Inspect values and release history:
+
+```bash
+helm get values employee -n devops-demo --all
+helm status employee -n devops-demo
+helm history employee -n devops-demo
+```
+
+Render the manifests without applying them:
+
+```bash
+helm template employee ./Helm/employee-management -n devops-demo -f ./Helm/employee-management/values-dev.yaml
+```
+
+List all releases in the namespace:
+
+```bash
+helm list -n devops-demo
+```
+
+Uninstall the release when needed:
+
+```bash
+helm uninstall employee -n devops-demo
+```
+
+Roll back to a previous revision if needed:
+
+```bash
+helm rollback employee <REVISION> -n devops-demo
+```
+
+---
+
 # 🔮 Future Improvements
 
 - GitHub Actions CI/CD
-- Helm Charts
 - Prometheus & Grafana Monitoring
 - TLS using cert-manager
 - ArgoCD GitOps Deployment

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: employee-management
+description: Helm chart for the full employee management application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

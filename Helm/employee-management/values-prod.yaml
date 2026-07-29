@@ -1,0 +1,12 @@
+frontend:
+  replicaCount: 3
+
+backend:
+  replicaCount: 4
+
+postgres:
+  storage:
+    size: 1Gi
+
+ingress:
+  host: employee.mycompany.com

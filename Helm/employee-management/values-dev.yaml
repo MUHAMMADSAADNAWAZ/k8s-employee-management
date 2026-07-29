@@ -1,0 +1,12 @@
+frontend:
+  replicaCount: 1
+
+backend:
+  replicaCount: 1
+
+postgres:
+  storage:
+    size: 1Gi
+
+ingress:
+  host: dev.employee.local
