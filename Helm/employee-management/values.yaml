@@ -1,9 +1,9 @@
 frontend:
   replicaCount: 2
   image:
-    repository: employee-frontend
-    tag: v1
-    pullPolicy: IfNotPresent
+    repository: muhammadsaadnawaz49/employee-frontend
+    tag: latest
+    pullPolicy: Always
   service:
     port: 80
     targetPort: 80
@@ -18,9 +18,9 @@ frontend:
 backend:
   replicaCount: 2
   image:
-    repository: employee-backend
-    tag: v1
-    pullPolicy: IfNotPresent
+    repository: muhammadsaadnawaz49/employee-backend
+    tag: latest
+    pullPolicy: Always
   service:
     port: 3001
   resources:
